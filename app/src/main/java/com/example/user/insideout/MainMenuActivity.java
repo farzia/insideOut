@@ -26,12 +26,15 @@ public class MainMenuActivity extends MainActivity {
 
                 //item position click will open new pages
                 switch (position){
-                    case 0:
+                    case 0:// Create New
                         Intent iCreate = new Intent(MainMenuActivity.this, CreateNewActivity.class);
                         startActivity(iCreate);
+                        break;
 
-                    case 1:
-                        //
+                    case 1:// My Projects
+                        Intent iMyProjects = new Intent(MainMenuActivity.this, MyProjectsActivity.class);
+                        startActivity(iMyProjects);
+                        break;
                     case 2:
                         //
                     case 3:

@@ -3,6 +3,7 @@ package com.example.user.insideout;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,6 +21,8 @@ import java.net.URI;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static com.example.user.insideout.ImageAdapter.getImageOrientation;
 
 /**
  * Created by user on 22-Jul-17.
@@ -43,22 +46,44 @@ public class TakePhotoActivity extends MainMenuActivity {
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
         projectName = (String)b.get("PROJECT_NAME");
+        pictureImagePath = (String)b.get("PATH");
 
         setTitle(projectName);// Activity title change according to project name
         setContentView(R.layout.photo_layout);
 
         photoTaken = (ImageView)findViewById(R.id.imageViewPhotoTaken);
+
         description= (TextView)findViewById(R.id.textViewDescription);
 
+        loadImage();
 
-        takePhoto();
+        //takePhoto();
+    }
+
+    private void loadImage(){
+        File f = new File(getFilesDir()+"/image/" + pictureImagePath);
+        Matrix matrix = new Matrix(); //android graphcis
+        matrix.postRotate(getImageOrientation(getFilesDir() + "/image/" + pictureImagePath));
+        //matrix.postRotate(getImageOrientation(hmItem.get("image_filename").toString()));
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        //options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        options.inPreferredConfig = Bitmap.Config.RGB_565;
+        options.inSampleSize = 4; //number the higher the smaller resolution
+
+        Bitmap bm = BitmapFactory.decodeFile(f.getAbsolutePath(), options);
+        Bitmap rotatedBitmap = Bitmap.createBitmap(bm, 0, 0,
+                bm.getWidth(),
+                bm.getHeight(), matrix, true);
+
+        photoTaken.setImageBitmap(rotatedBitmap);
     }
 
     public void takePhoto(){
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = projectName+ "_"+timeStamp + ".jpg";
         File storageDir = Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_PICTURES);
+                Environment.DIRECTORY_PICTURES);
         pictureImagePath = storageDir.getAbsolutePath() + "/" + imageFileName;
         File file = new File(pictureImagePath);
         Uri outputFileUri = Uri.fromFile(file);
@@ -80,7 +105,7 @@ public class TakePhotoActivity extends MainMenuActivity {
         File image = File.createTempFile(imageFileName,".jpg", storageDir);
         // Save a file: path for use with ACTION_VIEW intents
         pictureImagePath = image.getAbsolutePath();
-         return image;
+        return image;
     }
 
     //camera result
@@ -96,7 +121,7 @@ public class TakePhotoActivity extends MainMenuActivity {
                 Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 photoTaken.setImageBitmap(myBitmap);
 
-                }
+            }
 
 
 
@@ -110,10 +135,10 @@ public class TakePhotoActivity extends MainMenuActivity {
             // storing the image to SD card
             //storeCameraPhotoInSDCard(photo,timeStamp,imageName);
 
-           // getting the image file and displaying to the imageView
+            // getting the image file and displaying to the imageView
 
-           // Bitmap nBitmap = getImageFileFromSDCard(imageName);
-           // photoTaken.setImageBitmap(nBitmap);
+            // Bitmap nBitmap = getImageFileFromSDCard(imageName);
+            // photoTaken.setImageBitmap(nBitmap);
 
         }
 

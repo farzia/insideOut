@@ -7,9 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+
 public class MainActivity extends AppCompatActivity {
     private ImageView logo;
     private Button startButton;
+
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
+
+
 
     }
 }
