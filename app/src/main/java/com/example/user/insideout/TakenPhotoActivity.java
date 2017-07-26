@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,25 +29,26 @@ import static com.example.user.insideout.ImageAdapter.getImageOrientation;
  * Created by user on 22-Jul-17.
  */
 
-public class TakePhotoActivity extends MainMenuActivity {
+public class TakenPhotoActivity extends MainMenuActivity {
 
     static final int REQUEST_TAKE_PHOTO = 1;
     String projectName="";
 
     ImageView photoTaken;
     TextView description;
+    Button processButton;
 
-    String pictureImagePath= "";
+    String imageFile= "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //getting intent extra value project name
+        //getting intent extra value project and file name
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
         projectName = (String)b.get("PROJECT_NAME");
-        pictureImagePath = (String)b.get("PATH");
+        imageFile = (String)b.get("IMAGE_FILE");
 
         setTitle(projectName);// Activity title change according to project name
         setContentView(R.layout.photo_layout);
@@ -55,15 +57,18 @@ public class TakePhotoActivity extends MainMenuActivity {
 
         description= (TextView)findViewById(R.id.textViewDescription);
 
+        processButton= (Button)findViewById(R.id.buttonProcess) ;
+
         loadImage();
 
         //takePhoto();
     }
 
+    // loding the image into imageView
     private void loadImage(){
-        File f = new File(getFilesDir()+"/image/" + pictureImagePath);
-        Matrix matrix = new Matrix(); //android graphcis
-        matrix.postRotate(getImageOrientation(getFilesDir() + "/image/" + pictureImagePath));
+        File f = new File(getFilesDir()+"/image/" + imageFile);
+        Matrix matrix = new Matrix(); //android graphics
+        matrix.postRotate(getImageOrientation(getFilesDir() + "/image/" + imageFile));
         //matrix.postRotate(getImageOrientation(hmItem.get("image_filename").toString()));
 
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -79,13 +84,13 @@ public class TakePhotoActivity extends MainMenuActivity {
         photoTaken.setImageBitmap(rotatedBitmap);
     }
 
-    public void takePhoto(){
+   /* public void takePhoto(){
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = projectName+ "_"+timeStamp + ".jpg";
         File storageDir = Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES);
-        pictureImagePath = storageDir.getAbsolutePath() + "/" + imageFileName;
-        File file = new File(pictureImagePath);
+        imageFile = storageDir.getAbsolutePath() + "/" + imageFileName;
+        File file = new File(imageFile);
         Uri outputFileUri = Uri.fromFile(file);
 
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
@@ -104,7 +109,7 @@ public class TakePhotoActivity extends MainMenuActivity {
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(imageFileName,".jpg", storageDir);
         // Save a file: path for use with ACTION_VIEW intents
-        pictureImagePath = image.getAbsolutePath();
+        imageFile = image.getAbsolutePath();
         return image;
     }
 
@@ -116,7 +121,7 @@ public class TakePhotoActivity extends MainMenuActivity {
         // if a photo has been taken
         if (resultCode == RESULT_OK && requestCode== REQUEST_TAKE_PHOTO ) {
 
-            File imgFile = new  File(pictureImagePath);
+            File imgFile = new  File(imageFile);
             if(imgFile.exists()){
                 Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 photoTaken.setImageBitmap(myBitmap);
@@ -142,6 +147,6 @@ public class TakePhotoActivity extends MainMenuActivity {
 
         }
 
-    }
+    }*/
 
 }

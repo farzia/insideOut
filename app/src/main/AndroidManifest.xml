@@ -30,8 +30,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".TakePhotoActivity"/>
-
         <activity android:name="com.example.user.insideout.MainMenuActivity" />
 
         <activity android:name="com.example.user.insideout.CreateNewActivity"
@@ -41,6 +39,8 @@
         <activity android:name="com.example.user.insideout.MyProjectsActivity"
             android:label="@string/my_projects"
             android:parentActivityName=".MainMenuActivity"/>
+
+        <activity android:name="com.example.user.insideout.TakenPhotoActivity"/>
 
     </application>
 

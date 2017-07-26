@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +21,6 @@ import android.widget.ListView;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.LineNumberReader;
 
 /**
  * Created by user on 17-May-17.
@@ -148,7 +146,7 @@ public class CreateNewActivity extends MainMenuActivity {
             }
         }
 
-        //display theimage to another activity
+        //display the image to another activity
 
 
     }
@@ -195,7 +193,7 @@ public class CreateNewActivity extends MainMenuActivity {
                 File file = new File(this.getFilesDir() + "/image/" + newPicFile);
 
                 FileOutputStream /*//call the camera intent
-                          Intent ccameraIntent = new Intent(getBaseContext(), TakePhotoActivity.class);
+                          Intent ccameraIntent = new Intent(getBaseContext(), TakenPhotoActivity.class);
                           ccameraIntent.putExtra("PROJECT_NAME",projectName);
                           startActivity(ccameraIntent);*/out = new FileOutputStream(file);
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
@@ -217,11 +215,12 @@ public class CreateNewActivity extends MainMenuActivity {
         }
     }
 
+    //after taking picture and saving it calling the activity to view the image jaust taken
     private void viewPhoto() {
-        Intent ccameraIntent = new Intent(getBaseContext(), TakePhotoActivity.class);
-        ccameraIntent.putExtra("PROJECT_NAME", projectName);
-        ccameraIntent.putExtra("PATH", newPicFile);
-        startActivity(ccameraIntent);
+        Intent viewImageIntent = new Intent(getBaseContext(), TakenPhotoActivity.class);
+        viewImageIntent.putExtra("PROJECT_NAME", projectName);
+        viewImageIntent.putExtra("IMAGE_FILE", newPicFile);
+        startActivity(viewImageIntent);
     }
 
 }
