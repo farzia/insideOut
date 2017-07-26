@@ -40,9 +40,9 @@ public class TakenPhotoActivity extends MainMenuActivity {
 
     String imageFile= "";
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+           @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
 
         //getting intent extra value project and file name
         Intent intent = getIntent();

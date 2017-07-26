@@ -12,6 +12,9 @@ import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -19,8 +22,10 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by user on 17-May-17.
@@ -28,6 +33,7 @@ import java.io.IOException;
 public class CreateNewActivity extends MainMenuActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
+
     private String mCurrentPhotoPath;
     private String newPicFile = "";
 
@@ -73,6 +79,8 @@ public class CreateNewActivity extends MainMenuActivity {
 
                 if (position == 1) {
                     //import photos function
+                    Intent photoPickIntent = new Intent(getBaseContext(), PhotoPickerActivity.class);
+                    startActivity(photoPickIntent);
                 }
             }
         });
@@ -179,6 +187,7 @@ public class CreateNewActivity extends MainMenuActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        //condition for captured images
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 
             try {
@@ -210,7 +219,9 @@ public class CreateNewActivity extends MainMenuActivity {
             } catch (Exception exx) {
                 exx.printStackTrace();
             }
-        } else {
+        }
+
+        else {
 //            Toast.makeText(this, "directory not found ", Toast.LENGTH_LONG).show();
         }
     }
@@ -222,5 +233,41 @@ public class CreateNewActivity extends MainMenuActivity {
         viewImageIntent.putExtra("IMAGE_FILE", newPicFile);
         startActivity(viewImageIntent);
     }
+
+    // Initiating Menu XML file (menu.xml)
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+ //menu item click action
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+
+        switch (item.getItemId())
+        {
+            case R.id.action_showProject_list:
+                // Single menu item is selected do something
+                // Ex: launching new activity/screen or show alert message
+                Intent actionMuProjectIntent = new Intent(CreateNewActivity.this,
+                        MyProjectsActivity.class);
+                startActivity(actionMuProjectIntent);
+                return true;
+
+            case R.id.action_help:
+                Intent actionHelpIntent = new Intent(CreateNewActivity.this,
+                        HelpActivity.class);
+                startActivity(actionHelpIntent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
 }

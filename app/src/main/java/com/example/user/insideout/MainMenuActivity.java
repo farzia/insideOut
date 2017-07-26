@@ -24,7 +24,7 @@ public class MainMenuActivity extends MainActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
-                //item position click will open new pages
+                //item position click will open new activities
                 switch (position){
                     case 0:// Create New
                         Intent iCreate = new Intent(MainMenuActivity.this, CreateNewActivity.class);
@@ -35,10 +35,21 @@ public class MainMenuActivity extends MainActivity {
                         Intent iMyProjects = new Intent(MainMenuActivity.this, MyProjectsActivity.class);
                         startActivity(iMyProjects);
                         break;
-                    case 2:
-                        //
-                    case 3:
-                        //
+
+                    case 2: //My cloud
+                        Intent iMyCloud = new Intent(MainMenuActivity.this, MyCloudActivity.class);
+                        startActivity(iMyCloud);
+                        break;
+
+                    case 3://Settings
+                        Intent iSettings = new Intent(MainMenuActivity.this, SettingsActivity.class);
+                        startActivity(iSettings);
+                        break;
+
+                    case 4:// Help
+                        Intent iHelp = new Intent(MainMenuActivity.this, HelpActivity.class);
+                        startActivity(iHelp);
+                        break;
 
                 }
 

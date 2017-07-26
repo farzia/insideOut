@@ -40,7 +40,23 @@
             android:label="@string/my_projects"
             android:parentActivityName=".MainMenuActivity"/>
 
-        <activity android:name="com.example.user.insideout.TakenPhotoActivity"/>
+        <activity android:name="com.example.user.insideout.TakenPhotoActivity"
+            android:parentActivityName=".CreateNewActivity"/>
+
+        <activity android:name="com.example.user.insideout.HelpActivity"
+            android:label="Help"
+            android:parentActivityName=".MainMenuActivity"/>
+
+        <activity android:name="com.example.user.insideout.MyCloudActivity"
+            android:label="My Cloud"
+            android:parentActivityName=".MainMenuActivity"/>
+
+        <activity android:name="com.example.user.insideout.SettingsActivity"
+            android:label="Settings"
+            android:parentActivityName=".MainMenuActivity"/>
+
+        <activity android:name="com.example.user.insideout.PhotoPickerActivity"
+            android:parentActivityName=".CreateNewActivity"/>
 
     </application>
 
