@@ -34,13 +34,13 @@
         android:id="@+id/startButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/editTextPassword"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="27dp"
         android:text="@string/log_in" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/textViewEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/email"
@@ -50,33 +50,33 @@
         android:layout_marginTop="54dp" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editTextEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:layout_alignBaseline="@+id/textView8"
-        android:layout_alignBottom="@+id/textView8"
-        android:layout_toRightOf="@+id/textView8"
-        android:layout_toEndOf="@+id/textView8" />
+        android:layout_alignBaseline="@+id/textViewEmail"
+        android:layout_alignBottom="@+id/textViewEmail"
+        android:layout_toRightOf="@+id/textViewEmail"
+        android:layout_toEndOf="@+id/textViewEmail" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/textViewPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/editTextEmail"
         android:layout_marginTop="21dp"
-        android:layout_toLeftOf="@+id/editText"
-        android:layout_toStartOf="@+id/editText"
+        android:layout_toLeftOf="@+id/editTextEmail"
+        android:layout_toStartOf="@+id/editTextEmail"
         android:text="@string/password" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/editTextPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText"
-        android:layout_toEndOf="@+id/textView9"
-        android:layout_toRightOf="@+id/textView9"
+        android:layout_below="@+id/editTextEmail"
+        android:layout_toEndOf="@+id/textViewPassword"
+        android:layout_toRightOf="@+id/textViewPassword"
         android:ems="10"
         android:inputType="textPassword" />
 
